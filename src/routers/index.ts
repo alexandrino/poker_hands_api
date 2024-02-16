@@ -3,6 +3,6 @@ import { pokerController } from "../controllers/poker";
 
 const router: Router = Router();
 
-router.get("/", pokerController.home);
+router.post("/", pokerController.hand);
 
 export { router };
