@@ -27,6 +27,11 @@ const evaluateHand = (hand: Array<Card>): HandRank => {
     return HandRank.ThreeOfAKind;
   }
 
+  if (isTwoPair(hand)) {
+    return HandRank.TwoPair;
+  }
+
+
   return HandRank.HighCard;
 };
 
@@ -107,6 +112,16 @@ const isFullHouse = (hand: Array<Card>): Boolean => {
 const isThreeOfAKind = (hand: Array<Card>): Boolean => {
   return cardsOfAKind(hand, 3, 3);
 };
+
+/*
+ * Two pair is a hand that contains two cards of one rank, two cards of another rank and one card of a third rank
+ * @param {Array<Card>} hand Containg a list of cards to be evaluated
+ * @return {Boolean}
+ */
+const isTwoPair = (hand: Array<Card>): Boolean => {
+  return cardsOfAKind(hand, 2, 3);
+};
+
 
 const cardsOfAKind = (
   hand: Array<Card>,
