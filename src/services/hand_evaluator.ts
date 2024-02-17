@@ -19,6 +19,10 @@ const evaluateHand = (hand: Array<Card>): HandRank => {
     return HandRank.Flush;
   }
 
+  if (isStraight(hand)) {
+    return HandRank.Straight;
+  }
+
   return HandRank.HighCard;
 };
 
