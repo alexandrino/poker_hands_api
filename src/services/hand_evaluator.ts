@@ -23,6 +23,10 @@ const evaluateHand = (hand: Array<Card>): HandRank => {
     return HandRank.Straight;
   }
 
+  if (isThreeOfAKind(hand)) {
+    return HandRank.ThreeOfAKind;
+  }
+
   return HandRank.HighCard;
 };
 
@@ -95,6 +99,14 @@ const isFullHouse = (hand: Array<Card>): Boolean => {
   return cardsOfAKind(hand, 3, 2);
 };
 
+/*
+ * A Three Of A Kind is a hand that contains three cards of one rank and two cards of two other ranks
+ * @param {Array<Card>} hand Containg a list of cards to be evaluated
+ * @return {Boolean}
+ */
+const isThreeOfAKind = (hand: Array<Card>): Boolean => {
+  return cardsOfAKind(hand, 3, 3);
+};
 
 const cardsOfAKind = (
   hand: Array<Card>,
