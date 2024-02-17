@@ -7,6 +7,10 @@ const evaluateHand = (hand: Array<Card>): HandRank => {
     return HandRank.StraightFlush;
   }
 
+  if (isFourOfAKind(hand)) {
+    return HandRank.FourOfAKind;
+  }
+
   if (isFlush(hand)) {
     return HandRank.Flush;
   }
@@ -50,6 +54,15 @@ const isStraight = (hand: Array<Card>): Boolean => {
   return true;
 };
 
+/*
+ * A Four Of A Kind is a hand that contains four cards of one rank and one card of another rank
+ * @param {Array<Card>} hand Containg a list of cards to be evaluated
+ * @return {Boolean}
+ */
+const isFourOfAKind = (hand: Array<Card>): Boolean => {
+  return cardsOfAKind(hand, 4, 2);
+};
+
 
 /*
  * Group cards by a group type and count the number of ocurrences in each type
@@ -63,6 +76,27 @@ const groupCards = (hand: Array<Card>, groupType: string = "rank") => {
     const accHand = prev[key];
     return accHand ? { ...prev, [key]: accHand + 1 } : { ...prev, [key]: 1 };
   }, {});
+};
+
+const cardsOfAKind = (
+  hand: Array<Card>,
+  maxKind: number,
+  minLength: number = 2
+) => {
+  const group = groupCards(hand);
+  const keys = Object.keys(group);
+
+  if (keys.length !== minLength) {
+    return false;
+  }
+
+  for (let i = 0; i < keys.length; i++) {
+    const suit = keys[i];
+    if (group[suit] === maxKind) {
+      return true;
+    }
+  }
+  return false;
 };
 
 export { evaluateHand };
