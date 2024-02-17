@@ -11,6 +11,10 @@ const evaluateHand = (hand: Array<Card>): HandRank => {
     return HandRank.FourOfAKind;
   }
 
+  if (isFullHouse(hand)) {
+    return HandRank.FullHouse;
+  }
+
   if (isFlush(hand)) {
     return HandRank.Flush;
   }
@@ -77,6 +81,16 @@ const groupCards = (hand: Array<Card>, groupType: string = "rank") => {
     return accHand ? { ...prev, [key]: accHand + 1 } : { ...prev, [key]: 1 };
   }, {});
 };
+
+/*
+ * In a Full House, there's a hand that contains three cards of one rank and two cards of another rank
+ * @param {Array<Card>} hand Containg a list of cards to be evaluated
+ * @return {Boolean}
+ */
+const isFullHouse = (hand: Array<Card>): Boolean => {
+  return cardsOfAKind(hand, 3, 2);
+};
+
 
 const cardsOfAKind = (
   hand: Array<Card>,
