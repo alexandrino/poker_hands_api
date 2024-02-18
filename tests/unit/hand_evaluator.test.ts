@@ -1,6 +1,5 @@
-import { Suit, Rank } from '../../src/enums';
-import { evaluateHand } from '../../src/services/hand_evaluator'
-
+import { Suit, Rank } from "../../src/enums";
+import { evaluateHand } from "../../src/services/hand_evaluator";
 
 class Card {
   suit: Suit;
@@ -12,8 +11,8 @@ class Card {
   }
 }
 
-describe('hand_evaluator', () => {
-  test('Should return StraightFlush hand', () => {
+describe("hand_evaluator", () => {
+  test("Should return StraightFlush hand", () => {
     const straightFlush: Array<Card> = [
       new Card(Suit.Spades, Rank.Ten),
       new Card(Suit.Spades, Rank.Jack),
@@ -21,10 +20,10 @@ describe('hand_evaluator', () => {
       new Card(Suit.Spades, Rank.King),
       new Card(Suit.Spades, Rank.Ace),
     ];
-    expect(evaluateHand(straightFlush)).toBe('StraightFlush');
+    expect(evaluateHand(straightFlush)).toBe("StraightFlush");
   });
 
-  test('Should return fourOfAKind hand', () => {
+  test("Should return fourOfAKind hand", () => {
     const fourOfAKind: Array<Card> = [
       new Card(Suit.Hearts, Rank.Five),
       new Card(Suit.Diamonds, Rank.Five),
@@ -32,10 +31,10 @@ describe('hand_evaluator', () => {
       new Card(Suit.Spades, Rank.Five),
       new Card(Suit.Hearts, Rank.Three),
     ];
-    expect(evaluateHand(fourOfAKind)).toBe('FourOfAKind');
+    expect(evaluateHand(fourOfAKind)).toBe("FourOfAKind");
   });
 
-  test('Should return fullHouse hand', () => {
+  test("Should return fullHouse hand", () => {
     const fullHouse: Array<Card> = [
       new Card(Suit.Hearts, Rank.Five),
       new Card(Suit.Diamonds, Rank.Five),
@@ -43,10 +42,10 @@ describe('hand_evaluator', () => {
       new Card(Suit.Spades, Rank.Three),
       new Card(Suit.Hearts, Rank.Three),
     ];
-    expect(evaluateHand(fullHouse)).toBe('FullHouse');
+    expect(evaluateHand(fullHouse)).toBe("FullHouse");
   });
 
-  test('Should return flush hand', () => {
+  test("Should return flush hand", () => {
     const flush: Array<Card> = [
       new Card(Suit.Clubs, Rank.Ace),
       new Card(Suit.Clubs, Rank.Five),
@@ -54,10 +53,10 @@ describe('hand_evaluator', () => {
       new Card(Suit.Clubs, Rank.Five),
       new Card(Suit.Clubs, Rank.Two),
     ];
-    expect(evaluateHand(flush)).toBe('Flush');
+    expect(evaluateHand(flush)).toBe("Flush");
   });
 
-  test('Should return straight hand', () => {
+  test("Should return straight hand", () => {
     const straight: Array<Card> = [
       new Card(Suit.Spades, Rank.Ten),
       new Card(Suit.Diamonds, Rank.Jack),
@@ -65,10 +64,10 @@ describe('hand_evaluator', () => {
       new Card(Suit.Diamonds, Rank.King),
       new Card(Suit.Spades, Rank.Ace),
     ];
-    expect(evaluateHand(straight)).toBe('Straight');
+    expect(evaluateHand(straight)).toBe("Straight");
   });
 
-  test('Should return threeOfAKind hand', () => {
+  test("Should return threeOfAKind hand", () => {
     const threeOfAKind: Array<Card> = [
       new Card(Suit.Spades, Rank.Queen),
       new Card(Suit.Clubs, Rank.Queen),
@@ -76,10 +75,10 @@ describe('hand_evaluator', () => {
       new Card(Suit.Clubs, Rank.Two),
       new Card(Suit.Hearts, Rank.Nine),
     ];
-    expect(evaluateHand(threeOfAKind)).toBe('ThreeOfAKind');
+    expect(evaluateHand(threeOfAKind)).toBe("ThreeOfAKind");
   });
 
-  test('Should return twoPair hand', () => {
+  test("Should return twoPair hand", () => {
     const twoPair: Array<Card> = [
       new Card(Suit.Hearts, Rank.Jack),
       new Card(Suit.Clubs, Rank.Jack),
@@ -87,10 +86,10 @@ describe('hand_evaluator', () => {
       new Card(Suit.Clubs, Rank.Three),
       new Card(Suit.Hearts, Rank.Two),
     ];
-    expect(evaluateHand(twoPair)).toBe('TwoPair');
+    expect(evaluateHand(twoPair)).toBe("TwoPair");
   });
 
-  test('Should return onePair hand', () => {
+  test("Should return onePair hand", () => {
     const onePair: Array<Card> = [
       new Card(Suit.Hearts, Rank.Ten),
       new Card(Suit.Clubs, Rank.Ten),
@@ -98,10 +97,10 @@ describe('hand_evaluator', () => {
       new Card(Suit.Hearts, Rank.Seven),
       new Card(Suit.Spades, Rank.Four),
     ];
-    expect(evaluateHand(onePair)).toBe('OnePair');
+    expect(evaluateHand(onePair)).toBe("OnePair");
   });
 
-  test('Should return highCard hand', () => {
+  test("Should return highCard hand", () => {
     const highCard: Array<Card> = [
       new Card(Suit.Hearts, Rank.Ace),
       new Card(Suit.Clubs, Rank.Ten),
@@ -109,6 +108,6 @@ describe('hand_evaluator', () => {
       new Card(Suit.Diamonds, Rank.Eight),
       new Card(Suit.Hearts, Rank.Three),
     ];
-    expect(evaluateHand(highCard)).toBe('HighCard');
+    expect(evaluateHand(highCard)).toBe("HighCard");
   });
 });

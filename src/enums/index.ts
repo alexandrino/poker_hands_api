@@ -1,8 +1,8 @@
 export enum Suit {
-  Hearts = 'Hearts',
-  Diamonds = 'Diamonds',
-  Clubs = 'Clubs',
-  Spades = 'Spades',
+  Clubs = "Clubs",
+  Diamonds = "Diamonds",
+  Hearts = "Hearts",
+  Spades = "Spades",
 }
 
 export enum Rank {
@@ -22,14 +22,14 @@ export enum Rank {
 }
 
 export enum HandRank {
-  HighCard = 'HighCard',
-  OnePair = 'OnePair',
-  TwoPair = 'TwoPair',
-  ThreeOfAKind = 'ThreeOfAKind',
-  Straight = 'Straight',
-  Flush = 'Flush',
-  FullHouse = 'FullHouse',
-  FourOfAKind = 'FourOfAKind',
-  StraightFlush = 'StraightFlush',
-  RoyalFlush = 'RoyalFlush',
+  HighCard = "HighCard",
+  OnePair = "OnePair",
+  TwoPair = "TwoPair",
+  ThreeOfAKind = "ThreeOfAKind",
+  Straight = "Straight",
+  Flush = "Flush",
+  FullHouse = "FullHouse",
+  FourOfAKind = "FourOfAKind",
+  StraightFlush = "StraightFlush",
+  RoyalFlush = "RoyalFlush",
 }
