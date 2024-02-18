@@ -2,7 +2,6 @@ import { Card } from "../interfaces/card";
 import { HandRank } from "../enums";
 
 const evaluateHand = (hand: Array<Card>): HandRank => {
-
   if (isStraightFlush(hand)) {
     return HandRank.StraightFlush;
   }
@@ -40,7 +39,7 @@ const evaluateHand = (hand: Array<Card>): HandRank => {
 
 
 /*
- * A traight Flush is a hand that contains five cards of sequential rank, all of the same suit
+ * A Straight Flush is a hand that contains five cards of sequential rank, all of the same suit
  * @param {Array<Card>} hand Containg a list of cards to be evaluated
  * @return {Boolean}
  */
