@@ -136,7 +136,7 @@ const isOnePair = (hand: Array<Card>): Boolean => {
 const cardsOfAKind = (
   hand: Array<Card>,
   maxKind: number,
-  minLength: number = 2
+  minLength: number
 ) => {
   const group = groupCards(hand);
   const keys = Object.keys(group);
