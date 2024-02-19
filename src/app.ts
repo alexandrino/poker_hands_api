@@ -18,6 +18,7 @@ export class App {
   }
 
   private router() {
+    this.server.use('/api', router);
     this.server.use(router);
   }
 }

@@ -46,10 +46,10 @@ npm run test:coverage
 
 
 ### Usage
-To categorize a poker hand, make a POST request to http://localhost:3000/ with a JSON body containing the hand array. Each object in the hand array should have a suit and rank.
+To categorize a poker hand, make a POST request to http://localhost:3000/api/hand with a JSON body containing the hand array. Each object in the hand array should have a suit and rank.
 
 ```bash
-curl --location 'http://localhost:3000/' \
+curl --location 'http://localhost:3000/api/hand' \
 --header 'Content-Type: application/json' \
 --data '{
    "hand": [
