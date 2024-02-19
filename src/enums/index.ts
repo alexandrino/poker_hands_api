@@ -15,10 +15,10 @@ export enum Rank {
   Eight,
   Nine,
   Ten,
-  Jack,
-  Queen,
-  King,
-  Ace,
+  Jack = "J",
+  Queen = "Q",
+  King = "K",
+  Ace = "A",
 }
 
 export enum HandRank {

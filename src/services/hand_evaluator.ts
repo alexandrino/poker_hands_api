@@ -37,7 +37,6 @@ const evaluateHand = (hand: Array<Card>): HandRank => {
   return HandRank.HighCard;
 };
 
-
 /*
  * A Straight Flush is a hand that contains five cards of sequential rank, all of the same suit
  * @param {Array<Card>} hand Containg a list of cards to be evaluated
@@ -46,7 +45,6 @@ const evaluateHand = (hand: Array<Card>): HandRank => {
 const isStraightFlush = (hand: Array<Card>): Boolean => {
   return isFlush(hand) && isStraight(hand);
 };
-
 
 /*
  * A Flush is a hand that contains five cards all of the same suit, not all of sequential rank
@@ -63,8 +61,9 @@ const isFlush = (hand: Array<Card>): Boolean => {
  * @return {Boolean}
  */
 const isStraight = (hand: Array<Card>): Boolean => {
-  const sorted = hand.sort((card1, card2) => card2.rank - card1.rank);
+  const normalizedHand = normalizeHand(hand);
 
+  const sorted = normalizedHand.sort((card1, card2) => card2.rank - card1.rank);
   for (let i = 1; i < sorted.length; i++) {
     if (sorted[i - 1].rank !== sorted[i].rank + 1) {
       return false;
@@ -81,7 +80,6 @@ const isStraight = (hand: Array<Card>): Boolean => {
 const isFourOfAKind = (hand: Array<Card>): Boolean => {
   return cardsOfAKind(hand, 4, 2);
 };
-
 
 /*
  * Group cards by a group type and count the number of ocurrences in each type
@@ -133,6 +131,13 @@ const isOnePair = (hand: Array<Card>): Boolean => {
   return cardsOfAKind(hand, 2, 4);
 };
 
+/*
+ * Check if the hand contains cards of a kind
+ * @param {Array<Card>} hand Containg a list of cards to be evaluated
+ * @param {Number} maxKind The number of cards of a kind
+ * @param {Number} minLength The number of different cards of a kind
+ * @return {Boolean}
+ */
 const cardsOfAKind = (
   hand: Array<Card>,
   maxKind: number,
@@ -152,6 +157,33 @@ const cardsOfAKind = (
     }
   }
   return false;
+};
+
+/*
+ * Normalize the hand to be evaluated converting the rank to a number
+ * @param {Array<Card>} hand Containg a list of cards to be evaluated
+ * @return {Array<rank: number, suit: string>}
+ */
+const normalizeHand = (hand: Array<Card>) => {
+  return hand.map((card: Card) => {
+    if (card.rank === "J") {
+      return { ...card, rank: 11 };
+    }
+    if (card.rank === "Q") {
+      return { ...card, rank: 12 };
+    }
+    if (card.rank === "K") {
+      return { ...card, rank: 13 };
+    }
+    if (card.rank === "A") {
+      return { ...card, rank: 14 };
+    }
+
+    return {
+      suit: card.suit,
+      rank: Number(card.rank),
+    };
+  });
 };
 
 export { evaluateHand };
