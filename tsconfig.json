@@ -3,12 +3,19 @@
     "target": "es5",
     "module": "commonjs",
     "lib": ["es6"],
-    "allowJs": true,
-    "outDir": "build",
+    "outDir": ".dist/",
+    "allowJs": false,
     "rootDir": "src",
     "strict": true,
     "noImplicitAny": true,
     "esModuleInterop": true,
     "resolveJsonModule": true
-  }
+  },
+  "include": ["./**/*"],
+  "exclude": [
+    "./plugins/**/*",
+    "./typings/**/*",
+    "./tests",
+    "./dist/**/*" // This is what fixed it!
+  ]
 }

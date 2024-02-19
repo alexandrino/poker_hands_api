@@ -12,6 +12,7 @@ export class App {
 
   private middleware() {
     this.server.use(express.json());
+    this.server.use(express.urlencoded({ extended: true }));
   }
 
   private router() {
