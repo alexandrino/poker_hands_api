@@ -173,4 +173,52 @@ describe("POST /api/hand", () => {
     expect(res.statusCode).toEqual(200);
     expect(rankCategory).toEqual('OnePair');
   });
+
+  it("should return a validation error for missing hand", async () => {
+    const payload = {
+      hand: [
+        { suit: "spades", rank: "J" },
+        { suit: "spades", rank: "Q" },
+        { suit: "spades", rank: "K" },
+        { suit: "spades", rank: "A" },
+      ],
+    };
+    const res = await request(app).post("/api/hand").send(payload);
+
+    expect(res.statusCode).toEqual(400);
+    expect(res.body).toEqual({ errorMessage: '"hand" must contain at least 5 items' });
+  });
+
+  it("should return a validation error for suits value", async () => {
+    const payload = {
+      hand: [
+        { suit: "spadess", rank: 10 },
+        { suit: "spades", rank: "J" },
+        { suit: "spades", rank: "Q" },
+        { suit: "spades", rank: "K" },
+        { suit: "spades", rank: "A" },
+      ],
+    };
+    const res = await request(app).post("/api/hand").send(payload);
+
+    expect(res.statusCode).toEqual(400);
+    expect(res.body).toEqual({ errorMessage: '"hand[0].suit" must be one of [hearts, diamonds, clubs, spades]'});
+  });
+
+  it("should return a validation error for rank value", async () => {
+    const payload = {
+      hand: [
+        { suit: "spades", rank: 12 },
+        { suit: "spades", rank: "J" },
+        { suit: "spades", rank: "Q" },
+        { suit: "spades", rank: "K" },
+        { suit: "spades", rank: "A" },
+      ],
+    };
+    const res = await request(app).post("/api/hand").send(payload);
+
+    expect(res.statusCode).toEqual(400);
+    expect(res.body).toEqual({ errorMessage: '"hand[0].rank" must be one of [2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K, A]'});
+  });
+
 });
