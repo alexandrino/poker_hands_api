@@ -44,6 +44,11 @@ To run tests with coverage report:
 npm run test:coverage
 ```
 
+Run linting for the project
+```bash
+npm run lint
+```
+
 
 ### Usage
 To categorize a poker hand, make a POST request to http://localhost:3000/api/hand with a JSON body containing the hand array. Each object in the hand array should have a suit and rank.
