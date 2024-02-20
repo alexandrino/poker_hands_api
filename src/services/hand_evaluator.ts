@@ -1,4 +1,4 @@
-import { Card } from "../interfaces/card";
+import { Card, GroupCard } from "../interfaces/card";
 import { HandRank } from "../enums";
 
 const evaluateHand = (hand: Array<Card>): HandRank => {
@@ -40,27 +40,27 @@ const evaluateHand = (hand: Array<Card>): HandRank => {
 /*
  * A Straight Flush is a hand that contains five cards of sequential rank, all of the same suit
  * @param {Array<Card>} hand Containg a list of cards to be evaluated
- * @return {Boolean}
+ * @return {boolean}
  */
-const isStraightFlush = (hand: Array<Card>): Boolean => {
+const isStraightFlush = (hand: Array<Card>): boolean => {
   return isFlush(hand) && isStraight(hand);
 };
 
 /*
  * A Flush is a hand that contains five cards all of the same suit, not all of sequential rank
  * @param {Array<Card>} hand Containg a list of cards to be evaluated
- * @return {Boolean}
+ * @return {boolean}
  */
-const isFlush = (hand: Array<Card>): Boolean => {
+const isFlush = (hand: Array<Card>): boolean => {
   return Object.keys(groupCards(hand, "suit")).length === 1;
 };
 
 /*
  * A straight is a hand that contains five cards of sequential rank, not all of the same suit
  * @param {Array<Card>} hand Containg a list of cards to be evaluated
- * @return {Boolean}
+ * @return {boolean}
  */
-const isStraight = (hand: Array<Card>): Boolean => {
+const isStraight = (hand: Array<Card>): boolean => {
   const normalizedHand = normalizeHand(hand);
 
   const sorted = normalizedHand.sort((card1, card2) => card2.rank - card1.rank);
@@ -75,21 +75,21 @@ const isStraight = (hand: Array<Card>): Boolean => {
 /*
  * A Four Of A Kind is a hand that contains four cards of one rank and one card of another rank
  * @param {Array<Card>} hand Containg a list of cards to be evaluated
- * @return {Boolean}
+ * @return {boolean}
  */
-const isFourOfAKind = (hand: Array<Card>): Boolean => {
+const isFourOfAKind = (hand: Array<Card>): boolean => {
   return cardsOfAKind(hand, 4, 2);
 };
 
-/*
- * Group cards by a group type and count the number of ocurrences in each type
- * @param {Array<Card>} hand Containg a list of cards to be evaluated
- * @param {String} groupType Can be rank or suit
- * @return {Object|Hashmap} map with group and its total of ocurrences
+/**
+ * Groups the cards in a hand based on the specified group type.
+ * @param hand - The array of cards in the hand.
+ * @param groupType - The type of grouping to be performed. Defaults to "rank".
+ * @returns An object representing the grouped cards.
  */
 const groupCards = (hand: Array<Card>, groupType: string = "rank") => {
-  return hand.reduce((prev: any, curr: any) => {
-    const key = curr[groupType];
+  return hand.reduce((prev: GroupCard, curr: Card) => {
+    const key = groupType === "rank" ? curr.rank : curr.suit;
     const accHand = prev[key];
     return accHand ? { ...prev, [key]: accHand + 1 } : { ...prev, [key]: 1 };
   }, {});
@@ -98,36 +98,36 @@ const groupCards = (hand: Array<Card>, groupType: string = "rank") => {
 /*
  * In a Full House, there's a hand that contains three cards of one rank and two cards of another rank
  * @param {Array<Card>} hand Containg a list of cards to be evaluated
- * @return {Boolean}
+ * @return {boolean}
  */
-const isFullHouse = (hand: Array<Card>): Boolean => {
+const isFullHouse = (hand: Array<Card>): boolean => {
   return cardsOfAKind(hand, 3, 2);
 };
 
 /*
  * A Three Of A Kind is a hand that contains three cards of one rank and two cards of two other ranks
  * @param {Array<Card>} hand Containg a list of cards to be evaluated
- * @return {Boolean}
+ * @return {boolean}
  */
-const isThreeOfAKind = (hand: Array<Card>): Boolean => {
+const isThreeOfAKind = (hand: Array<Card>): boolean => {
   return cardsOfAKind(hand, 3, 3);
 };
 
 /*
  * Two pair is a hand that contains two cards of one rank, two cards of another rank and one card of a third rank
  * @param {Array<Card>} hand Containg a list of cards to be evaluated
- * @return {Boolean}
+ * @return {boolean}
  */
-const isTwoPair = (hand: Array<Card>): Boolean => {
+const isTwoPair = (hand: Array<Card>): boolean => {
   return cardsOfAKind(hand, 2, 3);
 };
 
 /*
  * Is a hand that contains two cards of one rank and three cards of three other ranks
  * @param {Array<Card>} hand Containg a list of cards to be evaluated
- * @return {Boolean}
+ * @return {boolean}
  */
-const isOnePair = (hand: Array<Card>): Boolean => {
+const isOnePair = (hand: Array<Card>): boolean => {
   return cardsOfAKind(hand, 2, 4);
 };
 
@@ -136,7 +136,7 @@ const isOnePair = (hand: Array<Card>): Boolean => {
  * @param {Array<Card>} hand Containg a list of cards to be evaluated
  * @param {Number} maxKind The number of cards of a kind
  * @param {Number} minLength The number of different cards of a kind
- * @return {Boolean}
+ * @return {boolean}
  */
 const cardsOfAKind = (
   hand: Array<Card>,
