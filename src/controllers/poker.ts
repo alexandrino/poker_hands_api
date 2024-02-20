@@ -1,4 +1,3 @@
-import Joi from "joi";
 import { Request, Response } from "express";
 
 import { evaluateHand } from "../services/hand_evaluator";
