@@ -49,6 +49,10 @@ Run linting for the project
 npm run lint
 ```
 
+### Running with Docker
+```bash
+docker-compose up
+```
 
 ### Usage
 To categorize a poker hand, make a POST request to http://localhost:3000/api/hand with a JSON body containing the hand array. Each object in the hand array should have a suit and rank.
