@@ -1,6 +1,11 @@
 import { Card, GroupCard } from "../interfaces/card";
 import { HandRank } from "../enums";
 
+/**
+ * Evaluates a poker hand and returns its rank.
+ * @param hand The array of cards representing the hand.
+ * @returns The rank of the hand.
+ */
 const evaluateHand = (hand: Array<Card>): HandRank => {
   if (isStraightFlush(hand)) {
     return HandRank.StraightFlush;
