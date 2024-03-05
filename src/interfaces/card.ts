@@ -1,4 +1,4 @@
-import { Suit, Rank } from "../enums";
+import { Suit, Rank, HandRank, HandRankLevel } from "../enums";
 
 export interface Card {
   rank: Rank;
@@ -7,4 +7,14 @@ export interface Card {
 
 export interface GroupCard {
   [key: string]: number;
+}
+
+export interface Hand {
+  cards: Array<Card>;
+}
+
+export interface EvaluatedHand {
+  hank: HandRank;
+  hand: Hand;
+  hankLevel: HandRankLevel;
 }

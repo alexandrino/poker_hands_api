@@ -33,3 +33,16 @@ export enum HandRank {
   StraightFlush = "StraightFlush",
   RoyalFlush = "RoyalFlush",
 }
+
+export enum HandRankLevel {
+  HighCard,
+  OnePair,
+  TwoPair,
+  ThreeOfAKind,
+  Straight,
+  Flush,
+  FullHouse,
+  FourOfAKind,
+  StraightFlush,
+  RoyalFlush,
+}

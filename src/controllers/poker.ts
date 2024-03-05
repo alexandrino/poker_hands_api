@@ -1,8 +1,8 @@
 import { Request, Response } from "express";
 
-import { evaluateHand } from "../services/hand_evaluator";
 import { handSchema } from "../schemas/hand";
 import { logger } from "../utils/logger";
+import { evaluateAllHands } from "../services/output_hands";
 
 class PokerController {
   public hand(req: Request, res: Response) {
@@ -23,20 +23,21 @@ class PokerController {
     }
 
     try {
-      const { hand } = body;
-      const rankCategory = evaluateHand(hand);
+      const { hands } = body;
+      const result = evaluateAllHands(hands);
 
       logger.info("pokerControler.request.success", {
         body,
-        rankCategory,
+        result,
       });
+
       return res.json({
-        rankCategory,
-        hand,
+        result,
       });
     } catch (error) {
+      console.log(error);
       logger.error("pokerControler.request.exception", {
-        errorMessage: error,
+        error,
         body,
       });
       return res.status(500).json({ errorMessage: "Internal Server Error" });
